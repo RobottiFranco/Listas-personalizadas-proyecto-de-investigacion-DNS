@@ -1,0 +1,21 @@
+dataset base
+
+uruguay:
+
+https://github.com/ooni/test-lists/blob/master/lists/uy.csv
+
+venezuela:
+
+https://github.com/ooni/test-lists/blob/master/lists/ve.csv
+https://ipysvenezuela.org/navegarconlibertad/tag/sitios-web-bloqueados/
+
+
+ooni run list
+
+Uruguay
+https://run.ooni.org/v2/10046  # ooni list
+https://run.ooni.org/v2/10047 # apuestas
+
+Venezuela
+https://run.ooni.org/v2/10045 # ooni list
+# apuestas

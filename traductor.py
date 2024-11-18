@@ -13,6 +13,3 @@ def traductor(archivo, outName, columna, delimitador=','):
                         writer.writerow([row[columna].strip()])
                 except IndexError:
                     print(f"Elemento saltado: {row}")
-
-traductor("uruguay\\uy-citizenlab.csv", "uruguay\\uy-citizenlab-clear.csv", 0, delimitador=',')
-traductor("uruguay\\uy-2023-2024.csv", "uruguay\\uy-2023-2024-clear.csv", 1, delimitador=';')

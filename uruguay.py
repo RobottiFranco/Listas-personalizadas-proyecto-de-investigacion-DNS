@@ -2,7 +2,6 @@
 import os
 from traductor import *
 
-
 # uruguay citizenlab
 traductor("uruguay\\uy-citizenlab.csv", "uruguay\\uy-citizenlab-clear-temp.csv", 0, delimitador=',')
 procesar_urls_y_agregar("uruguay\\uy-citizenlab-clear-temp.csv", "uruguay\\uy-citizenlab-clear.csv")

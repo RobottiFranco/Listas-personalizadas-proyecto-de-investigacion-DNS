@@ -1,9 +1,6 @@
 import csv
 import re
 
-
-""" funcion que toma un archivo .csv y lo transforma para su utilizacion de OONI run link"""
-""" toma el archivo original y el nombre del archivo de salida, la columna que se desea traducir y el tipo de delimitador"""
 def traductor(archivo=str, outName=str, columna=0, delimitador=','):
     with open(archivo, "r", newline='', encoding='utf-8') as csvfile:
         reader = csv.reader(csvfile, delimiter=delimitador)
@@ -19,7 +16,6 @@ def traductor(archivo=str, outName=str, columna=0, delimitador=','):
                     
 
 def corregir_csv(archivo_entrada, archivo_salida):
-    """Corrige el formato de un archivo CSV con IDs, URLs y resoluciones."""
     with open(archivo_entrada, "r", encoding="utf-8") as infile:
         lines = infile.readlines()
 
@@ -56,17 +52,34 @@ def procesar_urls_y_agregar(archivo_entrada, archivo_salida):
         for row in reader:
             if row:  # Evitar filas vacías
                 url = row[0].strip()  # Tomar la URL de la primera columna
-                if url.startswith("http://www.") or url.startswith("https://www."):
-                    urls_procesadas.append([url])  # Si ya tiene el formato correcto
-                else:
-                    # Agregar las dos variantes si no tiene el prefijo correcto
-                    urls_procesadas.append([f"http://www.{url.lstrip('www.')}"])
-                    urls_procesadas.append([f"https://www.{url.lstrip('www.')}"])
+
+                # Si no tiene prefijo, agregamos ambas variantes
+                if not (url.startswith("http://") or url.startswith("https://")):
+                    urls_procesadas.append(f"http://{url}")
+                    urls_procesadas.append(f"https://{url}")
+                
+                # Si tiene 'http://', no agregamos la variante 'https://'
+                elif url.startswith("http://") and not url.startswith("https://"):
+                    urls_procesadas.append(url)
+                
+                # Si tiene 'https://', no agregamos la variante 'http://'
+                elif url.startswith("https://") and not url.startswith("http://"):
+                    urls_procesadas.append(url)
 
     # Escribir las URLs procesadas al archivo de salida
     with open(archivo_salida, "w", newline="", encoding="utf-8") as outfile:
         writer = csv.writer(outfile)
-        writer.writerows(urls_procesadas)
+        for url in set(urls_procesadas):  # Eliminar duplicados y escribir URLs únicas
+            writer.writerow([url])
+
+    print(f"Se procesaron {len(urls_procesadas)} URLs y se agregaron al archivo '{archivo_salida}'.")
+
+
+    # Escribir las URLs procesadas al archivo de salida
+    with open(archivo_salida, "w", newline="", encoding="utf-8") as outfile:
+        writer = csv.writer(outfile)
+        for url in set(urls_procesadas):  # Eliminar duplicados y escribir URLs únicas
+            writer.writerow([url])
 
     print(f"Se procesaron {len(urls_procesadas)} URLs y se agregaron al archivo '{archivo_salida}'.")
 
@@ -79,7 +92,6 @@ def eliminar_duplicados(archivo_entrada, archivo_salida):
     patrones_no_deseados = [
         "o dominio denunciado",
         "http://www.url",
-        "https://www.url",
         "https://www.url"
     ]
 

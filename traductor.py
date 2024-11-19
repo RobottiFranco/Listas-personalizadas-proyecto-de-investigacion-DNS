@@ -95,6 +95,7 @@ def eliminar_duplicados(archivo_entrada, archivo_salida):
         "https://www.url",
         "http://url",
         "https://url",
+        "más en tribuna"
     ]
 
     # Leer el archivo de entrada y filtrar duplicados y las URLs no deseadas

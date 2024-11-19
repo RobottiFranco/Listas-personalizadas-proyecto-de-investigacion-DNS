@@ -92,7 +92,9 @@ def eliminar_duplicados(archivo_entrada, archivo_salida):
     patrones_no_deseados = [
         "o dominio denunciado",
         "http://www.url",
-        "https://www.url"
+        "https://www.url",
+        "http://url",
+        "https://url",
     ]
 
     # Leer el archivo de entrada y filtrar duplicados y las URLs no deseadas
@@ -100,10 +102,10 @@ def eliminar_duplicados(archivo_entrada, archivo_salida):
         reader = csv.reader(infile)
         for row in reader:
             if row:  # Evitar filas vacías
-                url = row[0].strip()
+                url = row[0].strip().lower()
 
                 # Filtrar URLs no deseadas
-                if not any(patron in url for patron in patrones_no_deseados):
+                if not any(patron.lower() in url for patron in patrones_no_deseados):
                     urls_unicas.add(url.lower())  # Agregar solo URLs únicas que no contengan patrones no deseados
 
     # Escribir las URLs únicas al archivo de salida

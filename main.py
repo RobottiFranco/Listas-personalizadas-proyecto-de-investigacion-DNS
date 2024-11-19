@@ -34,7 +34,7 @@ obtenerDatos(2000, "HU", "2023-11-21", "2024-11-20", "true")
 obtenerDatos(2000, "UY", "2023-11-21", "2024-11-20", "true")
 obtenerDatos(2000, "AR", "2023-11-21", "2024-11-20", "true")
 obtenerDatos(2000, "CU", "2023-11-21", "2024-11-20", "true")
-obtenerDatos(2000, "SV", "2014-11-21", "2024-11-20", "true")
+obtenerDatos(2000, "SV", "2023-11-21", "2024-11-20", "true")
 
 eliminar_duplicados_csv("resultados\\AR.csv", "historicos\\AR_OONI_RUN_LINK.csv")
 eliminar_duplicados_csv("resultados\\CU.csv", "historicos\\CU_OONI_RUN_LINK.csv")

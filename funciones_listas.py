@@ -58,6 +58,7 @@ def guardar_en_csv(datos, archivo_salida):
     if datos:
         with open(archivo_salida, mode="a", newline="", encoding="utf-8") as file:
             writer = csv.DictWriter(file, fieldnames=datos[0].keys())
+            writer.writeheader()
             writer.writerows(datos)
         print(f"Datos guardados en {archivo_salida}")
     else:

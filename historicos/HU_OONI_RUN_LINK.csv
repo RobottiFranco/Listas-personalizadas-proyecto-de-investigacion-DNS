@@ -1,3 +1,4 @@
+input
 http://www.match.com
 http://hackers.com
 http://de.lirio.us
@@ -43,7 +44,6 @@ http://www.defcon.org
 http://youporn.com
 http://www.piolet.com
 http://www.pass-any-drug-test.com
-input
 http://use-application-dns.net/
 http://www.usafa.af.mil/
 http://www.match.com/
@@ -1318,9 +1318,9 @@ https://sci.hubg.org/
 http://www.ruf-ch.org/
 https://earthobservatory.nasa.gov/global-maps
 https://mastodon.sdf.org/
-https://azonnali.hu/
 https://doh-fi.blahdns.com/dns-query?dns=q80BAAABAAAAAAAAA3d3dwdleGFtcGxlA2NvbQAAAQAB
 https://cloudflare-ipfs.com/
+https://azonnali.hu/
 https://ajtk.hu/
 https://www.mp3.com/
 https://www.facebook.com/

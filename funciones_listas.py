@@ -1,5 +1,6 @@
 import os
 import csv
+import time
 import urllib.parse
 import requests
 
@@ -18,14 +19,17 @@ def consulta(limite, pais, fechaInicio, fechaFinal, anomalia):
     return url
 
 
-def obtener_datos(url):
-    response = requests.get(url)
-    if response.status_code == 200:
-        result = response.json()
-    else:
-        print(f"Error en la consulta. Código de estado: {response.status_code}")
-        result = None
-    return result
+def obtener_datos(url, reintentos=3):
+    for intento in range(reintentos):
+        response = requests.get(url)
+        if response.status_code == 200:
+            return response.json()
+        else:
+            wait_time = 2 ** intento
+            print(f"Error {response.status_code}, esperando {wait_time} segundos antes de intentar de nuevo...")
+            time.sleep(wait_time)
+    print("Error persistente después de reintentos.")
+    return None
 
 
 def filtrar_dns(datos):
@@ -52,9 +56,8 @@ def eliminar_duplicados(datos):
 
 def guardar_en_csv(datos, archivo_salida):
     if datos:
-        with open(archivo_salida, mode="w", newline="", encoding="utf-8") as file:
+        with open(archivo_salida, mode="a", newline="", encoding="utf-8") as file:
             writer = csv.DictWriter(file, fieldnames=datos[0].keys())
-            writer.writeheader()
             writer.writerows(datos)
         print(f"Datos guardados en {archivo_salida}")
     else:
@@ -81,4 +84,5 @@ def obtenerDatos(limite, pais, fechaInicio, fechaFinal, anomalia):
     datos_sin_duplicados = eliminar_duplicados(datos_filtrados)
     
     # Paso 5: Guardar los resultados en un archivo CSV
-    guardar_en_csv(datos_sin_duplicados, f"resultados\\{pais}-final.csv")
+    guardar_en_csv(datos_sin_duplicados, f"resultados\\{pais}.csv")
+    

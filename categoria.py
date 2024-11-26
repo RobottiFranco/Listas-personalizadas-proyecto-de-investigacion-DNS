@@ -3,7 +3,7 @@ from funciones_graficos import *
 # uruguay
 generar_graficos(probe_cc="UY", since="2014-10-27", until="2024-11-27", time_grain="month", axis_x="category_code", test_name="web_connectivity")
 generar_graficos(probe_cc="UY", since="2014-10-27", until="2024-11-27", time_grain="month", axis_x="category_code", test_name="web_connectivity", ooni_run_link_id=10073)
-#generar_graficos(probe_cc="UY", since="2014-10-27", until="2024-11-27", time_grain="month", axis_x="category_code", test_name="web_connectivity", ooni_run_link_id=LISTA ACTUALIZADA)
+generar_graficos(probe_cc="UY", since="2014-10-27", until="2024-11-27", time_grain="month", axis_x="category_code", test_name="web_connectivity", ooni_run_link_id=10079)
 
 # argentina
 generar_graficos(probe_cc="AR", since="2014-10-27", until="2024-11-27", time_grain="month", axis_x="category_code", test_name="web_connectivity")

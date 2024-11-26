@@ -45,3 +45,4 @@ eliminar_duplicados_csv("resultados\\VE.csv", "historicos\\VE_OONI_RUN_LINK.csv"
  """
  
 obtenerDatosOONI(2000, "UY", "2024-10-27", "2024-11-27", "true", 10073)
+#eliminar_duplicados_csv("actualizados\\UY-10073.csv", "actualizadas\\UY_aactualizado_OONI_RUN_LINK.csv")

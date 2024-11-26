@@ -4,7 +4,7 @@ import time
 import urllib.parse
 import requests
 
-def consulta(limite, pais, fechaInicio, fechaFinal, anomalia):
+def consulta(limite, pais, fechaInicio, fechaFinal, anomalia, ooni_run_link_id=None):
     baseUrl= "https://api.ooni.org/api/v1/measurements?"
     parametros = {
         "limit": limite,
@@ -14,6 +14,10 @@ def consulta(limite, pais, fechaInicio, fechaFinal, anomalia):
         "until": fechaFinal,
         "anomaly": anomalia
     }
+    
+    if ooni_run_link_id is not None:
+        parametros["ooni_run_link_id"] = ooni_run_link_id
+     
     url = baseUrl + urllib.parse.urlencode(parametros)
     print(url)
     return url
@@ -65,11 +69,11 @@ def guardar_en_csv(datos, archivo_salida):
         print("No hay datos para guardar.")
 
 
-def obtenerDatos(limite, pais, fechaInicio, fechaFinal, anomalia):
+def obtenerDatosOONI(limite, pais, fechaInicio, fechaFinal, anomalia, ooni_run_link_id=None):
     print(f"Iniciando el proceso de {pais}...")
     
     # Paso 1: Armar consulta
-    url = consulta(limite, pais, fechaInicio, fechaFinal, anomalia)
+    url = consulta(limite, pais, fechaInicio, fechaFinal, anomalia, ooni_run_link_id)
     
     # Paso 2: Obtener los datos de la API
     datos = obtener_datos(url)
@@ -81,9 +85,11 @@ def obtenerDatos(limite, pais, fechaInicio, fechaFinal, anomalia):
     # Paso 3: Filtrar los resultados por 'blocking_type': 'dns'
     datos_filtrados = filtrar_dns(datos)
     
-    # Paso 4: Eliminar los duplicados basados en 'input'
-    datos_sin_duplicados = eliminar_duplicados(datos_filtrados)
-    
-    # Paso 5: Guardar los resultados en un archivo CSV
-    guardar_en_csv(datos_sin_duplicados, f"resultados\\{pais}.csv")
-    
+    if ooni_run_link_id is None:
+        # Paso 4: Eliminar los duplicados basados en 'input'
+        datos_sin_duplicados = eliminar_duplicados(datos_filtrados)
+        # Paso 5: Guardar los resultados en un archivo CSV
+        guardar_en_csv(datos_sin_duplicados, f"resultados\\{pais}.csv")
+    else:
+        # Paso 4: Guardar los resultados en un archivo CSV
+        guardar_en_csv(datos_filtrados, f"actualizadas\\{pais}-{ooni_run_link_id}.csv")

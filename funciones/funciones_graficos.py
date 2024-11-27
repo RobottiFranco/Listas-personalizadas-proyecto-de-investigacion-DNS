@@ -1,7 +1,7 @@
 import urllib.parse
 import matplotlib.pyplot as plt
 
-from funciones_listas import *
+from .funciones_listas import *
 
 def consulta_aggregacion(probe_cc, since, until, time_grain, axis_x, test_name, ooni_run_link_id=None):
     base_url = "https://api.ooni.org/api/v1/aggregation?"
@@ -27,15 +27,10 @@ def generar_grafico(datos, probe_cc, ooni_run_link_id = None):
     datos = datos.get("result", [])
     
     categorias = [item["category_code"] for item in datos]
-    #no_anomalias = [item["ok_count"] for item in datos]
     anomalies = [item["anomaly_count"] for item in datos]
-
-
 
     plt.figure(figsize=(12, 6))
     plt.bar(categorias, anomalies, color='yellow')
-    #plt.bar(categorias, no_anomalias, color='green')
-
 
     if ooni_run_link_id == None:
         plt.title(f"Conteo de anomalías por categoría para {probe_cc} OONI explorer", fontsize=16)

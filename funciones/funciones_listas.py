@@ -58,9 +58,9 @@ def eliminar_duplicados(datos):
     return result
 
 
-def guardar_en_csv(datos, archivo_salida):
+def guardar_en_csv(datos, archivo_salida, modo):
     if datos:
-        with open(archivo_salida, mode="a", newline="", encoding="utf-8") as file:
+        with open(archivo_salida, mode=modo, newline="", encoding="utf-8") as file:
             writer = csv.DictWriter(file, fieldnames=datos[0].keys())
             writer.writeheader()
             writer.writerows(datos)
@@ -70,26 +70,21 @@ def guardar_en_csv(datos, archivo_salida):
 
 
 def obtenerDatosOONI(limite, pais, fechaInicio, fechaFinal, anomalia, ooni_run_link_id=None):
-    print(f"Iniciando el proceso de {pais}...")
-    
-    # Paso 1: Armar consulta
-    url = consulta(limite, pais, fechaInicio, fechaFinal, anomalia, ooni_run_link_id)
-    
-    # Paso 2: Obtener los datos de la API
-    datos = obtener_datos(url)
-    
-    if datos is None:
-        print(f"No se pudieron obtener datos de {pais}")
-        return
-
-    # Paso 3: Filtrar los resultados por 'blocking_type': 'dns'
-    datos_filtrados = filtrar_dns(datos)
-    
-    if ooni_run_link_id is None:
-        # Paso 4: Eliminar los duplicados basados en 'input'
-        datos_sin_duplicados = eliminar_duplicados(datos_filtrados)
-        # Paso 5: Guardar los resultados en un archivo CSV
-        guardar_en_csv(datos_sin_duplicados, f"resultados\\{pais}.csv")
-    else:
-        # Paso 4: Guardar los resultados en un archivo CSV
-        guardar_en_csv(datos_filtrados, f"actualizadas\\{pais}-{ooni_run_link_id}.csv")
+    while fechaInicio <= fechaFinal:
+        inicio = f"{fechaInicio}-01-01"
+        final = f"{fechaInicio}-12-31"
+        print(f"Iniciando el proceso de {pais}...")
+        
+        url = consulta(limite, pais, inicio, final, anomalia, ooni_run_link_id)
+        datos = obtener_datos(url)
+        if datos is None:
+            print(f"No se pudieron obtener datos de {pais}")
+            return
+        datos_filtrados = filtrar_dns(datos)
+        if ooni_run_link_id is None:
+            datos_sin_duplicados = eliminar_duplicados(datos_filtrados)
+            guardar_en_csv(datos_sin_duplicados, f"Base_de_datos_OONI_por_ano\\{pais}.csv", "a")
+        else:
+            guardar_en_csv(datos_filtrados, f"Base_de_datos_actualiza\\{pais}-{ooni_run_link_id}.csv", "w")
+            
+        fechaInicio = fechaInicio + 1

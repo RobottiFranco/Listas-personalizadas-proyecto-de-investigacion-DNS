@@ -1,6 +1,6 @@
 import pandas as pd
 
-def eliminar_duplicados_csv(csv_file, archivo_salida):
+def crearOnniRunLink(csv_file, archivo_salida):
     df = pd.read_csv(csv_file)
     df = df[df['input'].str.lower() != 'input']
     df_sin_repetidos = df.drop_duplicates(subset='input', keep='first')

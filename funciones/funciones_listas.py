@@ -85,6 +85,6 @@ def obtenerDatosOONI(limite, pais, fechaInicio, fechaFinal, anomalia, ooni_run_l
             datos_sin_duplicados = eliminar_duplicados(datos_filtrados)
             guardar_en_csv(datos_sin_duplicados, f"Base_de_datos_OONI_por_ano\\{pais}.csv", "a")
         else:
-            guardar_en_csv(datos_filtrados, f"Base_de_datos_actualiza\\{pais}-{ooni_run_link_id}.csv", "w")
+            guardar_en_csv(datos_filtrados, f"Base_de_datos_actualizada\\{pais}-{ooni_run_link_id}.csv", "w")
             
         fechaInicio = fechaInicio + 1

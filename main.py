@@ -25,6 +25,9 @@ for pais in diccionarioPaises_ooni_historica:
 # 3-GRAFICAR LISTAS OONI HISOTRICAS Y ACTUALIZADAS
 
 for pais in diccionarioPaises_ooni_historica:
+    # historico de ooni explorer
     generar_graficos(probe_cc=pais, since="2016-01-01", until="2024-12-31", time_grain="month", axis_x="category_code", test_name="web_connectivity")
+    # historico (actual) de ooni link (bloqueos de dns, ip, etc)
     generar_graficos(probe_cc=pais, since="2016-01-01", until="2024-12-31", time_grain="month", axis_x="category_code", test_name="web_connectivity", ooni_run_link_id=diccionarioPaises_ooni_historica[pais])
+    # actualizado de ooni link (bloqueos de dns only)
     generar_graficos(probe_cc=pais, since="2016-01-01", until="2024-12-31", time_grain="month", axis_x="category_code", test_name="web_connectivity", ooni_run_link_id=diccionarioPaises_ooni_actualizada[pais])

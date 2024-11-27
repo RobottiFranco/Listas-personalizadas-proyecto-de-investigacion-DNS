@@ -1,7 +1,7 @@
 import urllib.parse
 import matplotlib.pyplot as plt
 
-from .funciones_listas import *
+from .FuncionesListas import *
 
 def consulta_aggregacion(probe_cc, since, until, time_grain, axis_x, test_name, ooni_run_link_id=None):
     """ 
@@ -36,7 +36,7 @@ def consulta_aggregacion(probe_cc, since, until, time_grain, axis_x, test_name, 
 def graficar(datos, probe_cc, ooni_run_link_id = None):
     """ 
     Genera un gráfico de barras a partir de los datos obtenidos de la API de OONI
-    datos: datos en formato JSON obtenidos de la API de OONI por el metodo obtener_datos de la clase funciones_listas
+    datos: datos en formato JSON obtenidos de la API de OONI por el metodo obtener_datos de la clase Funciones_listas
     probe_cc: código de país
     ooni_run_link_id: identificador de las listas de OONI
     """

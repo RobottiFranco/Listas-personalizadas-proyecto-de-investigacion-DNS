@@ -1,4 +1,4 @@
-from funciones.funciones_listas import *
+from Funciones.FuncionesListas import *
 from unittest.mock import patch
 
 def test_consulta_con_parametros_completos():
@@ -80,7 +80,7 @@ def test_eliminar_duplicados():
     
     
 from unittest.mock import mock_open, patch
-from funciones.funciones_listas import guardar_en_csv
+from Funciones.FuncionesListas import guardar_en_csv
 
 @patch("builtins.open", new_callable=mock_open)
 def test_guardar_en_csv(mock_file):

@@ -4,6 +4,16 @@ import matplotlib.pyplot as plt
 from .funciones_listas import *
 
 def consulta_aggregacion(probe_cc, since, until, time_grain, axis_x, test_name, ooni_run_link_id=None):
+    """ 
+    Construye una URL para consultar la API de OONI con los parámetros especificado
+    probe_cc: código de país
+    since: fecha de inicio en formato "YYYY-MM-DD"
+    until: fecha de final en formato "YYYY-MM-DD"
+    time_grain: granularidad de tiempo
+    axis_x: eje x
+    test_name: nombre de la prueba
+    ooni_run_link_id: identificador de las listas de OONI
+    """
     base_url = "https://api.ooni.org/api/v1/aggregation?"
     
     parametros = {
@@ -23,7 +33,13 @@ def consulta_aggregacion(probe_cc, since, until, time_grain, axis_x, test_name, 
     return url
 
 
-def generar_grafico(datos, probe_cc, ooni_run_link_id = None):
+def graficar(datos, probe_cc, ooni_run_link_id = None):
+    """ 
+    Genera un gráfico de barras a partir de los datos obtenidos de la API de OONI
+    datos: datos en formato JSON obtenidos de la API de OONI por el metodo obtener_datos de la clase funciones_listas
+    probe_cc: código de país
+    ooni_run_link_id: identificador de las listas de OONI
+    """
     datos = datos.get("result", [])
     
     categorias = [item["category_code"] for item in datos]
@@ -46,6 +62,16 @@ def generar_grafico(datos, probe_cc, ooni_run_link_id = None):
 
 
 def generar_graficos(probe_cc, since, until, time_grain, axis_x, test_name, ooni_run_link_id = None):
+    """ 
+    obtiene los datos de la API de OONI y genera un gráfico, metodo principal, se llama desde main
+    probe_cc: código de país
+    since: fecha de inicio en formato "YYYY-MM-DD"
+    until: fecha de final en formato "YYYY-MM-DD"
+    time_grain: granularidad de tiempo
+    axis_x: eje x
+    test_name: nombre de la prueba
+    ooni_run_link_id: identificador de las listas de OONI
+    """
     print(f"Iniciando el proceso de {probe_cc}...")
 
     url = consulta_aggregacion(probe_cc, since, until, time_grain, axis_x, test_name, ooni_run_link_id)
@@ -56,4 +82,4 @@ def generar_graficos(probe_cc, since, until, time_grain, axis_x, test_name, ooni
         print(f"No se pudieron obtener datos de {probe_cc}")
         return
     
-    generar_grafico(datos, probe_cc, ooni_run_link_id)
+    graficar(datos, probe_cc, ooni_run_link_id)

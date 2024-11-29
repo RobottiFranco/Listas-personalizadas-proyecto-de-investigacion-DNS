@@ -4,6 +4,7 @@ from Funciones.FuncionesListas import obtenerDatosOONI
 from Funciones.FuncionesGraficos import generar_graficos
 
 diccionarioPaises_ooni_historica = {"UY": "10081", "VE": "10082", "HN": "10083", "AR": "10084", "CU": "10085", "SV": "10086", "NI": "10087", "GT": "10088"}
+# a esta lista se le irana gregando los paises que faltan a medida que se hagan los analisis con ooni probe mobile
 diccionarioPaises_ooni_actualizada = {"UY": "10089"}
 
 # 1- OBTENER DATOS DE OONI, SE TOMAN 2000 POR AÑO DE CADA PAIS y PREPARACION DE LISTAS HISTORIAS DE CADA PAIS
@@ -23,11 +24,12 @@ for pais in diccionarioPaises_ooni_historica:
     crearOnniRunLink(f"Base_de_datos_actualizada\\{pais}-{diccionarioPaises_ooni_historica['UY']}.csv", f"Listas_de_OONI_actualizada\\{pais}_ACTUALIZADA.csv")
 
 # 3-GRAFICAR LISTAS OONI HISOTRICAS Y ACTUALIZADAS
-
+""" 
 for pais in diccionarioPaises_ooni_historica:
     # historico de ooni explorer
     generar_graficos(probe_cc=pais, since="2016-01-01", until="2024-12-31", time_grain="month", axis_x="category_code", test_name="web_connectivity")
     # historico (actual) de ooni link (bloqueos de dns, ip, etc)
     generar_graficos(probe_cc=pais, since="2016-01-01", until="2024-12-31", time_grain="month", axis_x="category_code", test_name="web_connectivity", ooni_run_link_id=diccionarioPaises_ooni_historica[pais])
     # actualizado de ooni link (bloqueos de dns only)
-    generar_graficos(probe_cc=pais, since="2016-01-01", until="2024-12-31", time_grain="month", axis_x="category_code", test_name="web_connectivity", ooni_run_link_id=diccionarioPaises_ooni_actualizada[pais])
+    generar_graficos(probe_cc=pais, since="2016-01-01", until="2024-12-31", time_grain="month", axis_x="category_code", test_name="web_connectivity", ooni_run_link_id=diccionarioPaises_ooni_actualizada[pais]) 
+"""

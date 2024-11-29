@@ -76,7 +76,7 @@ def generar_graficos(probe_cc, since, until, time_grain, axis_x, test_name, ooni
 
     url = consulta_aggregacion(probe_cc, since, until, time_grain, axis_x, test_name, ooni_run_link_id)
     
-    datos = obtener_datos(url, reintentos=3)
+    datos = obtener_datos(url, retries=3)
     
     if datos is None:
         print(f"No se pudieron obtener datos de {probe_cc}")

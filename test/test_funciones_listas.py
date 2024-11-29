@@ -3,11 +3,11 @@ from unittest.mock import patch
 
 def test_consulta_con_parametros_completos():
     url = consulta(
-        limite=10,
-        pais="UY",
-        fechaInicio="2024-01-01",
-        fechaFinal="2024-12-31",
-        anomalia=True,
+        limit=10,
+        probe_cc="UY",
+        since="2024-01-01",
+        until="2024-12-31",
+        anomaly=True,
         ooni_run_link_id="1234"
     )
     expected = (
@@ -19,11 +19,11 @@ def test_consulta_con_parametros_completos():
 
 def test_consulta_sin_ooni_run_link_id():
     url = consulta(
-        limite=5,
-        pais="BR",
-        fechaInicio="2023-01-01",
-        fechaFinal="2023-12-31",
-        anomalia=False
+        limit=5,
+        probe_cc="BR",
+        since="2023-01-01",
+        until="2023-12-31",
+        anomaly=False
     )
     expected = (
         "https://api.ooni.org/api/v1/measurements?"
@@ -49,7 +49,7 @@ def test_obtener_datos_error(mock_get):
     mock_get.side_effect = requests.RequestException("Error de red")
     
     url = "https://api.ooni.org/api/v1/measurements?test=error"
-    response = obtener_datos(url, reintentos=2)
+    response = obtener_datos(url, retries=2)
     
     assert response is None
     assert mock_get.call_count == 2

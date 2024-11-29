@@ -4,24 +4,24 @@ import time
 import urllib.parse
 import requests
 
-def consulta(limite, pais, fechaInicio, fechaFinal, anomalia, ooni_run_link_id=None):
+def consulta(limit, probe_cc, since, until, anomaly, ooni_run_link_id=None):
     """
     Construye una URL para consultar la API de OONI con los parámetros especificados
-    limite: número de resultados a obtener
-    pais: código de país
-    fechaInicio: fecha de inicio en formato "YYYY-MM-DD"
-    fechaFinal: fecha de final en formato "YYYY-MM-DD"
-    anomalia: booleano para indicar si se quieren obtener resultados anómalos o no
+    limit: número de resultados a obtener
+    probe_cc: código de país
+    since: fecha de inicio en formato "YYYY-MM-DD"
+    until: fecha de final en formato "YYYY-MM-DD"
+    anomaly: booleano para indicar si se quieren obtener resultados anómalos o no
     ooni_run_link_id: identificador de las listas de OONI
     """
     baseUrl= "https://api.ooni.org/api/v1/measurements?"
     parametros = {
-        "limit": limite,
-        "probe_cc": pais,
+        "limit": limit,
+        "probe_cc": probe_cc,
         "test_name": "web_connectivity",
-        "since": fechaInicio,
-        "until": fechaFinal,
-        "anomaly": anomalia
+        "since": since,
+        "until": until,
+        "anomaly": anomaly
     }
     
     if ooni_run_link_id is not None:
@@ -32,13 +32,13 @@ def consulta(limite, pais, fechaInicio, fechaFinal, anomalia, ooni_run_link_id=N
     return url
 
 
-def obtener_datos(url, reintentos=3):
+def obtener_datos(url, retries=3):
     """
     Realiza una solicitud GET a la URL especificada y devuelve los datos en formato JSON
     url: URL de la API de OONI
-    reintentos: número de veces que se intentará obtener los datos en caso de error (sistema de backoff exponencial)
+    retries: número de veces que se intentará obtener los datos en caso de error (sistema de backoff exponencial)
     """
-    for intento in range(reintentos):
+    for intento in range(retries):
         try:
             response = requests.get(url)
             response.raise_for_status()
@@ -47,7 +47,7 @@ def obtener_datos(url, reintentos=3):
             wait_time = 2 ** intento
             print(f"Error {e}, reintentando en {wait_time} segundos...")
             time.sleep(wait_time)
-    print("Error persistente después de reintentos.")
+    print("Error persistente después de retries.")
     return None
 
 
@@ -98,33 +98,33 @@ def guardar_en_csv(datos, archivo_salida, modo):
         print("No hay datos para guardar.")
 
 
-def obtenerDatosOONI(limite, pais, fechaInicio, fechaFinal, anomalia, ooni_run_link_id=None):
+def obtenerDatosOONI(limit, probe_cc, since, until, anomaly, ooni_run_link_id=None):
     """
     Obtiene los datos de la API de OONI, los filtra y los guarda en un archivo CSV, metodo principal, se ejecuta en el main.
-    limite: número de resultados a obtener
-    pais: código de país
-    fechaInicio: año de inicio
-    fechaFinal: año de final
-    anomalia: booleano para indicar si se quieren obtener resultados anómalos o no
+    limit: número de resultados a obtener
+    probe_cc: código de país
+    since: año de inicio
+    until: año de final
+    anomaly: booleano para indicar si se quieren obtener resultados anómalos o no
     ooni_run_link_id: identificador de las listas de OONI
     """
-    while fechaInicio <= fechaFinal:
-        inicio = f"{fechaInicio}-01-01"
-        final = f"{fechaInicio}-12-31"
-        print(f"Iniciando el proceso de {pais}...")
+    while since <= until:
+        inicio = f"{since}-01-01"
+        final = f"{since}-12-31"
+        print(f"Iniciando el proceso de {probe_cc}...")
         
-        url = consulta(limite, pais, inicio, final, anomalia, ooni_run_link_id)
+        url = consulta(limit, probe_cc, inicio, final, anomaly, ooni_run_link_id)
         datos = obtener_datos(url)
         if datos is None:
-            print(f"No se pudieron obtener datos de {pais}")
+            print(f"No se pudieron obtener datos de {probe_cc}")
             return
         datos_filtrados = filtrar_dns(datos)
+        datos_sin_duplicados = eliminar_duplicados(datos_filtrados)
         if ooni_run_link_id is None:
-            datos_sin_duplicados = eliminar_duplicados(datos_filtrados)
             os.makedirs("Base_de_datos_OONI_por_ano", exist_ok=True)
-            guardar_en_csv(datos_sin_duplicados, f"Base_de_datos_OONI_por_ano\\{pais}.csv", "a")
+            guardar_en_csv(datos_sin_duplicados, f"Base_de_datos_OONI_por_ano\\{probe_cc}.csv", "a")
         else:
             os.makedirs("Base_de_datos_actualizada", exist_ok=True)
-            guardar_en_csv(datos_filtrados, f"Base_de_datos_actualizada\\{pais}-{ooni_run_link_id}.csv", "w")
+            guardar_en_csv(datos_sin_duplicados, f"Base_de_datos_actualizada\\{probe_cc}-{ooni_run_link_id}.csv", "w")
             
-        fechaInicio = fechaInicio + 1
+        since = since + 1

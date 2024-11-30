@@ -19,7 +19,7 @@ class Consulta:
     
     
     def armar_consulta_grafica(self, time_grain, axis_x, test_name):
-        base_url = "https://explorer.ooni.org/api/aggregation?"
+        base_url = "https://api.ooni.org/api/v1/aggregation?"
         parametros = {
             "probe_cc": self.probe_cc,
             "since": self.since,

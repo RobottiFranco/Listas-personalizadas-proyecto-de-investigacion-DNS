@@ -1,7 +1,6 @@
 import os
-from Funciones.FuncionesCSV import crearOnniRunLink
-from Funciones.FuncionesListas import obtenerDatosOONI
-from Funciones.FuncionesGraficos import generar_graficos
+from Clases.FuncionesListas import obtenerDatosOONI
+from Clases.FuncionesGraficos import generar_graficos
 
 diccionarioPaises_ooni_historica = {"UY": "10081", "VE": "10082", "HN": "10083", "AR": "10084", "CU": "10085", "SV": "10086", "NI": "10087", "GT": "10088"}
 # a esta lista se le irana gregando los paises que faltan a medida que se hagan los analisis con ooni probe mobile

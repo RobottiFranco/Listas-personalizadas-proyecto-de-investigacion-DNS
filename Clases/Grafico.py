@@ -32,3 +32,11 @@ class Grafico:
 
             # Mostrar el gráfico
             plt.show()
+
+
+    def guardarGrafico(self, archivo_salida, formato="png"):
+        try:
+            plt.savefig(archivo_salida, format=formato)
+            print(f"Gráfico guardado como {archivo_salida}")
+        except Exception as e:
+            print(f"Error al guardar el gráfico: {e}")

@@ -46,6 +46,11 @@ def generar_graficos(probe_cc, since, until, time_grain, axis_x, test_name, ooni
     
     grafico = Grafico(datos, probe_cc, ooni_run_link_id)
     grafico.graficarBarrasAnomalias()
+    os.makedirs("graficos", exist_ok=True)
+    if ooni_run_link_id is None:
+        grafico.guardarGrafico(f"Graficos\\{probe_cc}.png")
+    else:
+        grafico.guardarGrafico(f"Graficos\\{probe_cc}-{ooni_run_link_id}.png")
 
 def extraer_datos():
     for pais in diccionarioPaises_ooni_historica:

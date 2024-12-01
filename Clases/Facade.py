@@ -92,7 +92,7 @@ def crearOnniRunLink_partiendo_de_historica():
 
 def graficar():
     for pais in diccionarioPaises_ooni_actualizada:
-        generar_graficos(pais, "2016-01-01", "2024-12-31", "month", "category_code", "web_connectivity")
+        generar_graficos(pais, "2024-01-01", "2024-12-31", "month", "category_code", "web_connectivity")
         generar_graficos(pais, "2024-01-01", "2024-12-31", "month", "category_code", "web_connectivity", diccionarioPaises_ooni_historica[pais])
         generar_graficos(pais, "2024-01-01", "2024-12-31", "month", "category_code", "web_connectivity", diccionarioPaises_ooni_actualizada[pais])
         

@@ -13,8 +13,8 @@ OBTIENE LOS DATOS DE OONI Y LOS GUARDA EN UNA LISTA PERSONALIZADA HISTORICA
 ES INDEPOTENTE, PUEDE EJECUTARSE CUANTAS VECES SEA NECESARIO.
 OBTIENE LOS DATOS DE LA LISTA PERSONALIZADA HISTORICA Y LOS GUARDA EN UNA LISTA PERSONALIZADA ACTUALIZADA
 """
-#extraer_datos_listaHistorica()
-#crearOnniRunLink_partiendo_de_historica()
+extraer_datos_listaHistorica()
+crearOnniRunLink_partiendo_de_historica()
 
 #3 - Graficar
 """ 

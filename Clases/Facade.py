@@ -25,11 +25,11 @@ def obtenerDatosOONI(limit, probe_cc, since, until, anomaly, ooni_run_link_id=No
     datos_sin_duplicados = csv.eliminar_duplicados(datosFiltrados)       
     
     if ooni_run_link_id is None:
-        os.makedirs("Base_de_datos_OONI_por_ano", exist_ok=True)
-        csv.guardar_en_csv(f"Base_de_datos_OONI_por_ano\\{probe_cc}.csv", datos_sin_duplicados, "a")
+        os.makedirs(os.path.join("Base_de_datos_OONI_por_ano"), exist_ok=True)
+        csv.guardar_en_csv(os.path.join("Base_de_datos_OONI_por_ano", f"{probe_cc}.csv"), datos_sin_duplicados, "a")
     else:
-        os.makedirs("Base_de_datos_actualizada", exist_ok=True)
-        csv.guardar_en_csv(f"Base_de_datos_actualizada\\{probe_cc}-{ooni_run_link_id}.csv", datos_sin_duplicados, "w")
+        os.makedirs(os.path.join("Base_de_datos_actualizada"), exist_ok=True)
+        csv.guardar_en_csv(os.path.join("Base_de_datos_actualizada", f"{probe_cc}-{ooni_run_link_id}.csv"), datos_sin_duplicados, "w")
         
         
 def generar_graficos(probe_cc, since, until, time_grain, axis_x, test_name, ooni_run_link_id = None):
@@ -47,11 +47,11 @@ def generar_graficos(probe_cc, since, until, time_grain, axis_x, test_name, ooni
     
     grafico = Grafico(datos, probe_cc, ooni_run_link_id)
     grafico.graficarBarrasAnomalias()
-    os.makedirs("graficos", exist_ok=True)
+    os.makedirs(os.path.join("graficos"), exist_ok=True)
     if ooni_run_link_id is None:
-        grafico.guardarGrafico(f"Graficos\\{probe_cc}.png")
+        grafico.guardarGrafico(os.path.join("Graficos", f"{probe_cc}.png"))
     else:
-        grafico.guardarGrafico(f"Graficos\\{probe_cc}-{ooni_run_link_id}.png")
+        grafico.guardarGrafico(os.path.join("Graficos", f"{probe_cc}-{ooni_run_link_id}.png"))
 
 def extraer_datos():
     for pais in diccionarioPaises_ooni_historica:
@@ -78,16 +78,16 @@ def extraer_datos_listaHistorica():
         obtenerDatosOONI(2000, pais, inicio, final, "true", diccionarioPaises_ooni_historica[pais])
     
 def crearOnniRunLink():
-    os.makedirs("Listas_de_OONI_historicas", exist_ok=True)
+    os.makedirs(os.path.join("Listas_de_OONI_historicas"), exist_ok=True)
     for pais in diccionarioPaises_ooni_historica:
         csv = CSVHandler()
-        csv.compenetrar_csv(f"Base_de_datos_OONI_por_ano\\{pais}.csv", f"Listas_de_OONI_historicas\\{pais}_HISTORICA.csv")
+        csv.compenetrar_csv(os.path.join("Base_de_datos_OONI_por_ano", f"{pais}.csv"), os.path.join("Listas_de_OONI_historicas", f"{pais}_HISTORICA.csv"))
 
 def crearOnniRunLink_partiendo_de_historica():
-    os.makedirs("Listas_de_OONI_actualizada", exist_ok=True)
+    os.makedirs(os.path.join("Listas_de_OONI_actualizada"), exist_ok=True)
     for pais in diccionarioPaises_ooni_historica:
         csv = CSVHandler()
-        csv.compenetrar_csv(f"Base_de_datos_actualizada\\{pais}-{diccionarioPaises_ooni_historica[pais]}.csv", f"Listas_de_OONI_actualizada\\{pais}_ACTUALIZADA.csv")
+        csv.compenetrar_csv(os.path.join("Base_de_datos_actualizada", f"{pais}-{diccionarioPaises_ooni_historica[pais]}.csv"), os.path.join("Listas_de_OONI_actualizada", f"{pais}_ACTUALIZADA.csv"))
 
 
 def graficar():

@@ -35,7 +35,7 @@ class Consulta:
     
         
     def armar_consulta_db_OONI(self, limit, anomaly, test_name):
-        base_url = "https://api.ooni.io/api/v1/measurements?"
+        base_url = "https://api.ooni.org/api/v1/measurements?"
         parametros = {
             "limit": limit,
             "probe_cc": self.probe_cc,

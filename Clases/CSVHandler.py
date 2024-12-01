@@ -1,4 +1,5 @@
 import csv
+import pandas as pd
 
 class CSVHandler:
     def __init__(self):
@@ -50,3 +51,28 @@ class CSVHandler:
             print(f"Datos guardados en {archivo_salida}")
         else:
             print("No hay datos para guardar.")
+            
+
+    def compenetrar_csv(self, csv_file, archivo_salida):
+        """ 
+        Crea un archivo CSV con los links de OONI Run
+        csv_file: archivo CSV con los datos de OONI Run
+        archivo_salida: nombre del archivo CSV donde se guardarán los links
+        """
+        try:
+            # Leer el archivo CSV
+            df = pd.read_csv(csv_file)
+            
+            # Filtrar filas donde 'input' no es igual a 'input'
+            df = df[df['input'].str.lower() != 'input']
+            
+            # Eliminar duplicados basados en la columna 'input'
+            df_sin_repetidos = df.drop_duplicates(subset='input', keep='first')
+            
+            # Guardar solo la columna 'input' en el archivo de salida
+            df_sin_repetidos[['input']].to_csv(archivo_salida, index=False)
+            
+            print(f"Archivo {csv_file} procesado y guardado como {archivo_salida}")
+        
+        except Exception as e:
+            print(f"Error al procesar el archivo {csv_file}: {e}")

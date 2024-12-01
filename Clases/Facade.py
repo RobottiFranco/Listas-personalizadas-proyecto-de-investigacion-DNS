@@ -5,8 +5,9 @@ from .ClienteAPI import *
 from .CSVHandler import *
 from .Grafico import *
 
-diccionarioPaises_ooni_historica = {"UY": "10091", "VE": "10092", "HN": "10093", "AR": "10094", "CU": "10095", "SV": "10096", "NI": "10097", "GT": "10098"}
-diccionarioPaises_ooni_actualizada = {"UY": "10100"}
+# "VE": "10092", "HN": "10093", "AR": "10094", "CU": "10095", "SV": "10096", "NI": "10097", "GT": "10098"
+diccionarioPaises_ooni_historica = {"UY": "10091"}
+diccionarioPaises_ooni_actualizada = {"UY": "10099"}
 
 def obtenerDatosOONI(limit, probe_cc, since, until, anomaly, ooni_run_link_id=None):
     url = Consulta(probe_cc, since, until, ooni_run_link_id)
@@ -72,21 +73,9 @@ def extraer_datos():
             
 def extraer_datos_listaHistorica():
     for pais in diccionarioPaises_ooni_historica:
-        since = 2016
-        until = 2024
-        while since <= until:
-            month = 1
-            while month <= 12:
-                inicio = f"{since}-{month:02d}-01"
-                if month == 2:
-                    final = f"{since}-{month:02d}-28"
-                elif month in [4, 6, 9, 11]:
-                    final = f"{since}-{month:02d}-30"
-                else:
-                    final = f"{since}-{month:02d}-31"
-                obtenerDatosOONI(2000, pais, inicio, final, "true", diccionarioPaises_ooni_historica[pais])
-                month += 1
-            since += 1
+        inicio = f"2024-09-01"
+        final = f"2025-06-28"
+        obtenerDatosOONI(2000, pais, inicio, final, "true", diccionarioPaises_ooni_historica[pais])
     
 def crearOnniRunLink():
     os.makedirs("Listas_de_OONI_historicas", exist_ok=True)

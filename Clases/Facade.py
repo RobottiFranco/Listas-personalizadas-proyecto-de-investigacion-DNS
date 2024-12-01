@@ -7,7 +7,7 @@ from .Grafico import *
 
 # "VE": "10092", "HN": "10093", "AR": "10094", "CU": "10095", "SV": "10096", "NI": "10097", "GT": "10098"
 diccionarioPaises_ooni_historica = {"UY": "10091"}
-diccionarioPaises_ooni_actualizada = {"UY": "10099"}
+diccionarioPaises_ooni_actualizada = {"UY": "10099", "VE": "10092", "HN": "10093", "AR": "10094", "CU": "10095", "SV": "10096", "NI": "10097", "GT": "10098"}
 
 def obtenerDatosOONI(limit, probe_cc, since, until, anomaly, ooni_run_link_id=None):
     url = Consulta(probe_cc, since, until, ooni_run_link_id)
@@ -93,6 +93,6 @@ def crearOnniRunLink_partiendo_de_historica():
 def graficar():
     for pais in diccionarioPaises_ooni_actualizada:
         generar_graficos(pais, "2016-01-01", "2024-12-31", "month", "category_code", "web_connectivity")
-        generar_graficos(pais, "2024-01-01", "2024-12-31", "month", "category_code", "web_connectivity", diccionarioPaises_ooni_historica[pais])
-        generar_graficos(pais, "2024-01-01", "2024-12-31", "month", "category_code", "web_connectivity", diccionarioPaises_ooni_actualizada[pais])
+"""         generar_graficos(pais, "2024-01-01", "2024-12-31", "month", "category_code", "web_connectivity", diccionarioPaises_ooni_historica[pais])
+        generar_graficos(pais, "2024-01-01", "2024-12-31", "month", "category_code", "web_connectivity", diccionarioPaises_ooni_actualizada[pais]) """
         

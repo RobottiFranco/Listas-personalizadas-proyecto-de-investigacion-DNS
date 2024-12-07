@@ -1,4 +1,4 @@
-from Clases.Facade import *
+from obtenerCategoriasPais import *
 
 #1 - Extraer datos de OONI y crear lista personalizada historica
 """ 
@@ -21,4 +21,12 @@ OBTIENE LOS DATOS DE LA LISTA PERSONALIZADA HISTORICA Y LOS GUARDA EN UNA LISTA 
 ES INDEPOTOENTE, PUEDE EJECUTARSE CUANTAS VECES SEA NECESARIO.
 GRAFICA LOS DATOS DE LA BASE DE DATOS DE OONI (todo tipo de anomalia), LISTA HISTORICA (anomalias identificadas como DNS en su dia) Y ACTUALIZADA (solo DNS actual) PERSONALIZADAS
 """
-graficar()
+#graficar()
+
+
+
+#sv_paginas_por_categoria()
+
+#crearOnniRunLinkSALVADOR()
+
+#graficarSALVADOR()

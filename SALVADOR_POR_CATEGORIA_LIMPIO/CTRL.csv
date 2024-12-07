@@ -1,0 +1,14 @@
+input
+https://sentry.io/api/0/
+http://connect.rom.miui.com/generate_204
+https://o0.ingest.sentry.io/api/0
+http://connectivitycheck.android.com/generate_204
+https://use-application-dns.net/
+http://clients3.google.com/generate_204
+http://www.msftncsi.com/ncsi.txt
+http://www.msftconnecttest.com/connecttest.txt
+http://start.ubuntu.com/connectivity-check.html
+https://s3.amazonaws.com/ooni-data/archives-raw/yaml_tar_vault.json
+https://repo1.maven.org/
+http://networkcheck.kde.org/
+https://clients5.google.com/robots.txt

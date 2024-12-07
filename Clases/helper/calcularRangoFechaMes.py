@@ -1,4 +1,4 @@
-def obtener_rango_mes(año, mes):
+def obtener_rango_mes(año: int, mes: int) -> tuple:
     inicio = f"{año}-{mes:02d}-01"
     if mes == 2:
         final = f"{año}-{mes:02d}-28"

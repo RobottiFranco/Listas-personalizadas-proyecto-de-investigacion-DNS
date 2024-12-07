@@ -3,7 +3,7 @@ from Clases.ClienteAPI import ClienteAPI
 from Clases.CSVHandler import CSVHandler
 
 
-def obtener_datos_ooni_db(consulta: Consulta ,limit, anomaly, directorio_salida, nombre_archivo, modo):
+def obtener_datos_ooni_db(consulta: Consulta , limit: int, anomaly: bool, directorio_salida: str, nombre_archivo: str, modo: str) -> None:
     print(f"Iniciando el proceso datos de {consulta.probe_cc}...")
 
     url = consulta

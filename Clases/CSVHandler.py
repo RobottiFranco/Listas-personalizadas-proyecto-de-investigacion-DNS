@@ -9,7 +9,7 @@ class CSVHandler:
         pass
 
 
-    def _filtrar_dns(self, datos):
+    def _filtrar_dns(self, datos: dict) -> list:
         result = []
         if "results" in datos:
             for item in datos["results"]:
@@ -18,7 +18,7 @@ class CSVHandler:
         return result
 
 
-    def _eliminar_duplicados(self, datos):
+    def _eliminar_duplicados(self, datos: list) -> list:
         seen_inputs = set()
         result = []
 
@@ -31,11 +31,11 @@ class CSVHandler:
         return result
     
     
-    def filtrar_y_eliminar_duplicados(self, datos):
+    def filtrar_y_eliminar_duplicados(self, datos: dict) -> list:
         return self._eliminar_duplicados(self._filtrar_dns(datos))
 
 
-    def guardar_en_csv(self, archivo_salida, datos, modo):
+    def guardar_en_csv(self, archivo_salida: str, datos, modo: str):
         if datos:
             with open(archivo_salida, mode=modo, newline="", encoding="utf-8") as file:
                 writer = csv.DictWriter(file, fieldnames=datos[0].keys())
@@ -46,7 +46,7 @@ class CSVHandler:
             print("No hay datos para guardar.")
             
 
-    def _compenetrar_csv(self, archivo_entrada, archivo_salida):
+    def _compenetrar_csv(self, archivo_entrada: str, archivo_salida: str) -> None:
         try:
             df = pd.read_csv(archivo_entrada)
             df = df[df['input'].str.lower() != 'input']
@@ -59,13 +59,13 @@ class CSVHandler:
             print(f"Error al procesar el archivo {archivo_entrada}: {e}")
             
             
-    def _crear_archivo_y_ruta(self, base_dir, nombre_archivo):
+    def _crear_archivo_y_ruta(self, base_dir: str, nombre_archivo: str) -> str:
         os.makedirs(base_dir, exist_ok=True)
         ruta_completa = os.path.join(base_dir, nombre_archivo)
         print(f"Ruta creada o verificada: {ruta_completa}")
         return ruta_completa
     
-    def crear_ooni_run_link(self, archivo_entrada, nombre_archivo, directorio_salida):
+    def crear_ooni_run_link(self, archivo_entrada: str, nombre_archivo: str, directorio_salida: str) -> None:
         for pais in diccionario_Paise_lista_ooni_historica:
             archivo_salida = self._crear_archivo_y_ruta(directorio_salida, f"{pais}_{nombre_archivo}.csv")
             CSVHandler()._compenetrar_csv(archivo_entrada, archivo_salida)

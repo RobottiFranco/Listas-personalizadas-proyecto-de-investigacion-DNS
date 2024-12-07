@@ -6,7 +6,7 @@ from Clases.helper.globalVariables import consulta_db as base_url
 from Clases.helper.obtenerDatosOoniDB import obtener_datos_ooni_db
 
 
-def obtener_metricas_por_categoria_y_ano(since: int, until: int, probe_cc) -> None:
+def obtener_metricas_por_categoria_y_ano(since: int, until: int, probe_cc: str) -> None:
     for category in category_code:
         while since <= until:
             for month in range(1, 13):

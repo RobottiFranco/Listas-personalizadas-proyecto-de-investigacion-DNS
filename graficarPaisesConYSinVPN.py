@@ -11,5 +11,5 @@ def graficar_pais():
         obtener_grafico(consulta, "month", "category_code", None, "graficos_paises", f"{pais} actualizada sin VPN")
         
         consulta = Consulta(base_url, "web_connectivity", pais, "2016-01-01", "2024-12-31", diccionario_Pais_lista_ooni_actualizada[pais], None, None, None, None)
-        obtener_grafico(consulta, "month", "category_code", None, "graficos_paises", f"{pais} actualizada con VPN")
+        obtener_grafico(consulta, "month", "category_code", None, "graficos_paises", f"{pais} actualizada sin VPN")
 

@@ -5,7 +5,7 @@ from Clases.Grafico import Grafico
 from Clases.helper.globalVariables import category_code
 
 
-def obtener_grafico(consulta: Consulta, time_grain, axis_x, axis_y, directorio_salida, nombre_archivo):
+def obtener_grafico(consulta: Consulta, time_grain: str, axis_x: str, axis_y: str, directorio_salida: str, nombre_archivo: str) -> None:
     print(f"Iniciando el proceso grafico de {consulta.probe_cc}...")
     
     url = consulta

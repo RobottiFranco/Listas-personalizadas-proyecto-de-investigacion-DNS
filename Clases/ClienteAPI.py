@@ -6,7 +6,7 @@ class ClienteAPI:
         self.url = url
         self.retries = retries
         
-    def _backoff(self, retry):
+    def _backoff(self, retry: int) -> int:
         return 2 ** retry
 
     def realizar_solicitud_obtencion(self):

@@ -1,7 +1,7 @@
 import urllib.parse
 
 class Consulta:
-    def __init__(self, base_url, test_name, probe_cc, since, until, ooni_run_link_id, probe_asn, domain, input, category_code):
+    def __init__(self, base_url: str, test_name: str, probe_cc: str, since: str, until: str, ooni_run_link_id: int, probe_asn: int, domain: str, input: str, category_code: str):
         self.base_url = base_url
         self.test_name = test_name
         self.probe_cc = probe_cc
@@ -13,14 +13,14 @@ class Consulta:
         self.input = input
         self.category_code = category_code
 
-    def _eliminar_parametros_nulos(self, parametros):
+    def _eliminar_parametros_nulos(self, parametros: dict) -> dict:
         return {k: v for k, v in parametros.items() if v is not None}
 
-    def _armar_url(self, parametros):
+    def _armar_url(self, parametros: dict) -> str:
         parametros = self._eliminar_parametros_nulos(parametros)
         return self.base_url + "?" + urllib.parse.urlencode(parametros, doseq=True)
 
-    def armar_consulta_grafica(self, time_grain, axis_x, axis_y):
+    def armar_consulta_grafica(self, time_grain: str, axis_x: str, axis_y: str) -> str:
         parametros = {
             "probe_cc": self.probe_cc,
             "probe_asn": self.probe_asn,
@@ -37,7 +37,7 @@ class Consulta:
         }
         return self._armar_url(parametros)
 
-    def armar_consulta_db(self, limit, anomaly):
+    def armar_consulta_db(self, limit: int, anomaly: bool) -> str:
         parametros = {
             "probe_cc": self.probe_cc,
             "probe_asn": self.probe_asn,

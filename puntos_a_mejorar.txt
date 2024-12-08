@@ -1,0 +1,3 @@
+mejorar nombres de clase
+crear clase padre consulta e hijas consultaGrafica y consultaDB
+crear test

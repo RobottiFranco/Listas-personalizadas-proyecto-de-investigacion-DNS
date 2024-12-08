@@ -67,6 +67,5 @@ class CSVHandler:
         return ruta_completa
     
     def crear_ooni_run_link(self, archivo_entrada: str, nombre_archivo: str, directorio_salida: str) -> None:
-        for pais in diccionario_Paise_lista_ooni_historica:
-            archivo_salida = self.crear_archivo_y_ruta(directorio_salida, f"{pais}_{nombre_archivo}.csv")
-            CSVHandler()._compenetrar_csv(archivo_entrada, archivo_salida)
+        archivo_salida = self.crear_archivo_y_ruta(directorio_salida, f"{nombre_archivo}.csv")
+        CSVHandler()._compenetrar_csv(archivo_entrada, archivo_salida)

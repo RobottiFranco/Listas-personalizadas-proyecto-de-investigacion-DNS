@@ -23,5 +23,4 @@ class ClienteAPI:
             except Exception as e:
                 print(f"Error inesperado: {e}. Deteniendo los intentos.")
                 response = None
-        print(f"No se pudo obtener una respuesta válida desde {self.url} después de {self.retries} intentos.")
         return response

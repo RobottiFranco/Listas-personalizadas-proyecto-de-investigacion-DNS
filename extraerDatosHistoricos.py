@@ -13,6 +13,13 @@ def extraer_datos_por_mes(since: int, until: int) -> None:
                 obtener_datos_ooni_db(consulta, 2000, "true", "Base_de_datos/historica", pais, "a")
             since += 1
 
-extraer_datos_por_mes(since=2016, until=2024)
 
-CSVHandler().crear_ooni_run_link("Base_de_datos/historica", {pais: pais for pais in diccionario_Paise_lista_ooni_historica}, "Listas_OONI/historicas")
+def crear_ooni_run_link_historica() -> None:    
+    for pais in diccionario_Paise_lista_ooni_historica:
+        CSVHandler().crear_ooni_run_link(f"Base_de_datos/historica/{pais}.csv", f"{pais}_HISTORICA", "Listas_OONI/historicas")
+
+
+# Main
+
+extraer_datos_por_mes(since=2016, until=2024)
+crear_ooni_run_link_historica()

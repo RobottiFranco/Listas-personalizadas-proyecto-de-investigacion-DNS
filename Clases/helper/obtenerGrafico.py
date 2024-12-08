@@ -20,5 +20,5 @@ def obtener_grafico(consulta: Consulta, time_grain: str, axis_x: str, axis_y: st
     grafico = Grafico(datos, consulta.probe_cc, consulta.ooni_run_link_id)
     grafico.graficarBarrasAnomalias()
     
-    ruta = CSVHandler()._crear_archivo_y_ruta(directorio_salida, f"{nombre_archivo}.png")
+    ruta = CSVHandler().crear_archivo_y_ruta(directorio_salida, f"{nombre_archivo}.png")
     grafico.guardarGrafico(ruta)

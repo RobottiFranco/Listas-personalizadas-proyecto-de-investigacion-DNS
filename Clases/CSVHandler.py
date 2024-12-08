@@ -59,7 +59,8 @@ class CSVHandler:
             print(f"Error al procesar el archivo {archivo_entrada}: {e}")
             
             
-    def _crear_archivo_y_ruta(self, base_dir: str, nombre_archivo: str) -> str:
+    def crear_archivo_y_ruta(self, base_dir: str, nombre_archivo: str) -> str:
+        base_dir = os.path.normpath(base_dir)  
         os.makedirs(base_dir, exist_ok=True)
         ruta_completa = os.path.join(base_dir, nombre_archivo)
         print(f"Ruta creada o verificada: {ruta_completa}")
@@ -67,5 +68,5 @@ class CSVHandler:
     
     def crear_ooni_run_link(self, archivo_entrada: str, nombre_archivo: str, directorio_salida: str) -> None:
         for pais in diccionario_Paise_lista_ooni_historica:
-            archivo_salida = self._crear_archivo_y_ruta(directorio_salida, f"{pais}_{nombre_archivo}.csv")
+            archivo_salida = self.crear_archivo_y_ruta(directorio_salida, f"{pais}_{nombre_archivo}.csv")
             CSVHandler()._compenetrar_csv(archivo_entrada, archivo_salida)

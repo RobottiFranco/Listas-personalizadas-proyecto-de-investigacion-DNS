@@ -7,9 +7,6 @@ def extraer_datos_actualizados(since: str, until: str) -> None:
     for pais in diccionario_Paise_lista_ooni_historica:
         consulta = Consulta(base_url, "web_connectivity", pais, since, until, diccionario_Paise_lista_ooni_historica[pais], None, None, None, None)
         obtener_datos_ooni_db(consulta, 2000, "true", "Base_de_datos/actualizada", pais, "w")
-        
-
-CSVHandler().crear_ooni_run_link("Base_de_datos/actualizada", "", "Listas_OONI/actualizada")
 
 def crear_ooni_run_link_actualizado() -> None:    
     for pais in diccionario_Pais_lista_ooni_actualizada:

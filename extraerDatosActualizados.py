@@ -14,5 +14,5 @@ def crear_ooni_run_link_actualizado() -> None:
 
 # Main
 
-extraer_datos_actualizados("2024-09-01", "2025-06-28")
+extraer_datos_actualizados("2024-12-08", "2025-06-28")
 crear_ooni_run_link_actualizado()

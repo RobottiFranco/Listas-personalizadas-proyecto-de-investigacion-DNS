@@ -7,3 +7,5 @@ category_code = {"REL": "Religión", "POLR": "Crítica política", "HUMR": "Cues
 consulta_grafica = "https://api.ooni.org/api/v1/aggregation"
 
 consulta_db = "https://api.ooni.org/api/v1/measurements"
+
+consulta_obtener_datos_bloqueo = "https://api.ooni.org/api/v1/raw_measurement"

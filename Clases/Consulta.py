@@ -1,7 +1,7 @@
 import urllib.parse
 
 class Consulta:
-    def __init__(self, base_url: str, test_name: str, probe_cc: str, since: str, until: str, ooni_run_link_id: int, probe_asn: int, domain: str, input: str, category_code: str):
+    def __init__(self, base_url: str, test_name: str = None, probe_cc: str = None, since: str = None, until: str = None, ooni_run_link_id: int = None, probe_asn: int = None, domain: str = None, input: str = None, category_code: str = None):
         self.base_url = base_url
         self.test_name = test_name
         self.probe_cc = probe_cc
@@ -50,5 +50,12 @@ class Consulta:
             "input": self.input,
             "ooni_run_link_id": self.ooni_run_link_id,
             "category_code": self.category_code,
+        }
+        return self._armar_url(parametros)
+
+
+    def armar_consulta_datos_bloqueo(self, measurement_uid: str) -> str:
+        parametros = {
+            "measurement_uid": measurement_uid,
         }
         return self._armar_url(parametros)

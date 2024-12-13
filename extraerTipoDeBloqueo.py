@@ -1,7 +1,4 @@
-
-
 import csv
-from Clases.CSVHandler import CSVHandler
 from Clases.helper.obtenerTipoDeBloqueo import obtener_tipo_de_bloqueo
 
 

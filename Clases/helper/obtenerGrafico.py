@@ -28,7 +28,7 @@ def obtener_grafico_mejorado(consulta: Consulta, time_grain: str, axis_x: str, a
     
     url = consulta
     url = url.armar_consulta_grafica(time_grain, axis_x, axis_y)
-    
+    print(url)
     datos = ClienteAPI(url, 3)
     datos = datos.realizar_solicitud_obtencion()
     if datos is None:

@@ -35,8 +35,12 @@ class CSVHandler:
         return self._eliminar_duplicados(self._filtrar_dns(datos))
 
 
-    def guardar_en_csv(self, archivo_salida: str, datos, modo: str):
+    def guardar_en_csv(self, archivo_salida: str, datos, modo: str, category_code: str = None):
         if datos:
+            if category_code:
+                for fila in datos:
+                    fila['category_code'] = category_code
+                
             with open(archivo_salida, mode=modo, newline="", encoding="utf-8") as file:
                 writer = csv.DictWriter(file, fieldnames=datos[0].keys())
                 writer.writeheader()
@@ -44,7 +48,7 @@ class CSVHandler:
             print(f"Datos guardados en {archivo_salida}")
         else:
             print("No hay datos para guardar.")
-            
+
 
     def guardar_en_csv_mod(self, archivo_salida: str, datos: list, modo: str):
         if datos:

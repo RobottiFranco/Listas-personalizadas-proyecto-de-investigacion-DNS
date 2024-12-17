@@ -45,6 +45,18 @@ class CSVHandler:
         else:
             print("No hay datos para guardar.")
             
+    def escribir_tipo_de_bloqueo_csv(self, archivo_salida: str, datos: list, modo: str):
+        if datos:
+            with open(archivo_salida, mode=modo, newline="", encoding="utf-8") as file:
+                writer = csv.DictWriter(file, fieldnames=datos[0].keys())
+                if file.tell() == 0:
+                    writer.writeheader()
+                writer.writerows(datos)
+            print(f"Datos guardados en {archivo_salida}")
+        else:
+            print("No hay datos para guardar.")
+
+            
 
     def _compenetrar_csv(self, archivo_entrada: str, archivo_salida: str) -> None:
         try:

@@ -16,5 +16,6 @@ def tipo_de_bloqueo(archivo_entrada: str, nombre_salida: str, archivo_salida: st
 
 # Main
 
-tipo_de_bloqueo("Base_de_datos/actualizada/UY.csv", "tipo_de_bloqueo", "UY")
-tipo_de_bloqueo("Base_de_datos/actualizada/AR.csv", "tipo_de_bloqueo", "AR")
+#tipo_de_bloqueo("Base_de_datos/actualizada/UY.csv", "tipo_de_bloqueo", "UY")
+#tipo_de_bloqueo("Base_de_datos/actualizada/AR.csv", "tipo_de_bloqueo", "AR")
+tipo_de_bloqueo("Base_de_datos/actualizada/VE.csv", "tipo_de_bloqueo", "VE")
